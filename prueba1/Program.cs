@@ -93,7 +93,14 @@ internal class Program
     {
         using (var db = new prueba1.DepartamentoRecursos())
         {
-            Console.WriteLine("Leer\n");
+            Console.WriteLine("Leyendo...\n");
+
+            var departamento = db.Departments.OrderBy(x => x.DepartmentId).First();
+            Console.WriteLine(departamento.DepartmentId);
+            Console.WriteLine(departamento.Name);
+            Console.WriteLine(departamento.GroupName);
+            Console.WriteLine(departamento.ModifiedDate);
+            Console.WriteLine("\n");
         }
     }
 

@@ -137,20 +137,12 @@ internal class Program
             bool b;
             int id;
 
-            var departamento = db.Departments.AsEnumerable().ElementAt(id - 1);
-
             do
             {
                 Console.WriteLine("Introduce el id del departamento: \n");
                 eleccion = Console.ReadLine();
 
                 b = int.TryParse(eleccion, out id);
-
-                Console.WriteLine(departamento.DepartmentId);
-                Console.WriteLine(departamento.Name);
-                Console.WriteLine(departamento.GroupName);
-                Console.WriteLine(departamento.ModifiedDate);
-                Console.WriteLine("\n");
 
                 Console.WriteLine("Introduce el nuevo nombre del departamento: \n");
                 nNombre = Console.ReadLine();
@@ -174,6 +166,15 @@ internal class Program
 
             } while (nNombre == null || nGrupo == null || id == null);
 
+            var departamento = db.Departments.AsEnumerable().ElementAt(id - 1);
+
+          
+
+            Console.WriteLine(departamento.DepartmentId);
+            Console.WriteLine(departamento.Name);
+            Console.WriteLine(departamento.GroupName);
+            Console.WriteLine(departamento.ModifiedDate);
+            Console.WriteLine("\n");
 
             Console.WriteLine("Actualizando...\n");
 
@@ -189,7 +190,9 @@ internal class Program
     {
         using (var db = new prueba1.DepartamentoRecursos())
         {
-            Console.WriteLine("Eliminar\n");
+
+
+            Console.WriteLine("Eliminando...\n");
         }
     }
 

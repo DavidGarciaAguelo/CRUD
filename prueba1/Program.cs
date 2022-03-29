@@ -80,7 +80,7 @@ internal class Program
             
 
             Console.WriteLine("Creando nuevo departamento...\n");
-            db.Departments.Add(new prueba1.Department { Name = nombre, GroupName = grupo, ModifiedDate = DateTime.Now});
+            db.Departments.Add(new prueba1.Department { Name = nombre, GroupName = grupo});
             db.SaveChanges();
 
             Console.WriteLine("Creado.\n");
@@ -91,11 +91,34 @@ internal class Program
 
     static void Leer()
     {
+        //String eleccion;
+        //bool b;
+        //int id;
+
+        /*
+          do {
+                Console.WriteLine("Introduce el id del departamento: \n");
+                eleccion = Console.ReadLine();
+
+                b = int.TryParse(eleccion, out id);
+
+                if (id == null)
+                {
+                    Console.WriteLine("Un campo no ha sido rellenado, vuelve a insertalo por favor.\n");
+                    
+                }
+
+            }while(id == null); 
+         
+         */
+
         using (var db = new prueba1.DepartamentoRecursos())
         {
             Console.WriteLine("Leyendo...\n");
 
             var departamento = db.Departments.OrderBy(x => x.DepartmentId).First();
+            //^^^^^^^^^aqui tambien se puede poner: var departamento = db.Departments.AsEnumerable().ElementAt(id);
+
             Console.WriteLine(departamento.DepartmentId);
             Console.WriteLine(departamento.Name);
             Console.WriteLine(departamento.GroupName);
@@ -108,7 +131,57 @@ internal class Program
     {
         using (var db = new prueba1.DepartamentoRecursos())
         {
-            Console.WriteLine("Actualizar\n");
+            String nNombre;
+            String nGrupo;
+            String eleccion;
+            bool b;
+            int id;
+
+            var departamento = db.Departments.AsEnumerable().ElementAt(id - 1);
+
+            do
+            {
+                Console.WriteLine("Introduce el id del departamento: \n");
+                eleccion = Console.ReadLine();
+
+                b = int.TryParse(eleccion, out id);
+
+                Console.WriteLine(departamento.DepartmentId);
+                Console.WriteLine(departamento.Name);
+                Console.WriteLine(departamento.GroupName);
+                Console.WriteLine(departamento.ModifiedDate);
+                Console.WriteLine("\n");
+
+                Console.WriteLine("Introduce el nuevo nombre del departamento: \n");
+                nNombre = Console.ReadLine();
+
+                Console.WriteLine("Introduce el nuevo nombre del grupo al que pertenece ese departamento: \n");
+                nGrupo = Console.ReadLine();
+
+                if (nNombre == null)
+                {
+                    Console.WriteLine("El campo nombre no ha sido rellenado, tendrás que volver a insertarlo.\n");
+
+                }else if(nGrupo == null)
+                {
+                    Console.WriteLine("El campo nombreGrupo no ha sido rellenado, tendrás que volver a insertarlo.\n");
+
+                }
+                else if(id == null)
+                {
+                    Console.WriteLine("El campo id no ha sido rellenado, tendrás que volver a insertarlo.\n");
+                }
+
+            } while (nNombre == null || nGrupo == null || id == null);
+
+
+            Console.WriteLine("Actualizando...\n");
+
+            departamento.Name = nNombre;
+            departamento.GroupName = nGrupo;
+            departamento.ModifiedDate = DateTime.Now;
+
+            db.SaveChanges();
         }
     }
 

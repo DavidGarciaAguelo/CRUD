@@ -18,6 +18,7 @@ internal class Program
         int num;
 
         do {
+            Console.WriteLine("____________________________________________\n");
             Console.WriteLine("Selecciona la opcion que deseas realizar: \n");
             Console.WriteLine("1. Crear\n");
             Console.WriteLine("2. Leer\n");
@@ -25,6 +26,7 @@ internal class Program
             Console.WriteLine("4. Eliminar\n");
             Console.WriteLine("5. Mostrar\n");
             Console.WriteLine("0. Salir\n");
+            Console.WriteLine("____________________________________________\n");
 
             eleccion = Console.ReadLine();
 
@@ -91,7 +93,7 @@ internal class Program
 
         }
 
-        Console.Clear();
+        Console.WriteLine("\n");
 
     }
 
@@ -131,7 +133,7 @@ internal class Program
             Console.WriteLine(departamento.ModifiedDate);
             Console.WriteLine("\n");
         }
-
+        Console.WriteLine("\n");
     }
 
     static void Actualizar()
@@ -175,6 +177,8 @@ internal class Program
 
             var departamento = db.Departments.AsEnumerable().ElementAt(id - 1);
 
+            Console.WriteLine("Departamento a actualizar con los nuevos datos: \n");
+
             Console.WriteLine(departamento.DepartmentId);
             Console.WriteLine(departamento.Name);
             Console.WriteLine(departamento.GroupName);
@@ -191,20 +195,31 @@ internal class Program
 
             
         }
-        Console.Clear();
+        Console.WriteLine("\n");
     }
 
     static void Eliminar()
     {
+        String eleccion;
+        bool b;
+        int id;
+
         using (var db = new prueba1.DepartamentoRecursos())
         {
+            Console.WriteLine("Introduce el id del departamento: \n");
+            eleccion = Console.ReadLine();
 
+            b = int.TryParse(eleccion, out id);
+
+            var departamento = db.Departments.AsEnumerable().ElementAt(id - 1);
+
+            db.Remove(departamento);
+            db.SaveChanges();
 
             Console.WriteLine("Eliminando...\n");
-
            
         }
-        Console.Clear();
+        Console.WriteLine("\n");
     }
 
     static void Mostrar()
@@ -218,8 +233,9 @@ internal class Program
         }
         //await Task.Delay(4000);
 
-        Console.Clear();
-    }
+        Console.WriteLine("\n");
 
+    }
+    
 }
 

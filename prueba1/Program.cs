@@ -17,14 +17,13 @@ internal class Program
         bool b;
         int num;
 
-       
-
         do {
             Console.WriteLine("Selecciona la opcion que deseas realizar: \n");
             Console.WriteLine("1. Crear\n");
             Console.WriteLine("2. Leer\n");
             Console.WriteLine("3. Actualizar\n");
             Console.WriteLine("4. Eliminar\n");
+            Console.WriteLine("5. Mostrar\n");
             Console.WriteLine("0. Salir\n");
 
             eleccion = Console.ReadLine();
@@ -44,6 +43,9 @@ internal class Program
                 case 4:
                     Eliminar();
                     break;
+                case 5:
+                    Mostrar();
+                    break;
 
             }
 
@@ -54,7 +56,7 @@ internal class Program
     }
 
 
-    static void Crear()
+    static async void Crear()
     {
         using (var db = new prueba1.DepartamentoRecursos())
         {
@@ -85,7 +87,11 @@ internal class Program
 
             Console.WriteLine("Creado.\n");
 
+           
+
         }
+
+        Console.Clear();
 
     }
 
@@ -125,6 +131,7 @@ internal class Program
             Console.WriteLine(departamento.ModifiedDate);
             Console.WriteLine("\n");
         }
+
     }
 
     static void Actualizar()
@@ -168,8 +175,6 @@ internal class Program
 
             var departamento = db.Departments.AsEnumerable().ElementAt(id - 1);
 
-          
-
             Console.WriteLine(departamento.DepartmentId);
             Console.WriteLine(departamento.Name);
             Console.WriteLine(departamento.GroupName);
@@ -183,7 +188,10 @@ internal class Program
             departamento.ModifiedDate = DateTime.Now;
 
             db.SaveChanges();
+
+            
         }
+        Console.Clear();
     }
 
     static void Eliminar()
@@ -193,7 +201,24 @@ internal class Program
 
 
             Console.WriteLine("Eliminando...\n");
+
+           
         }
+        Console.Clear();
+    }
+
+    static void Mostrar()
+    {
+        using (var db = new prueba1.DepartamentoRecursos())
+        {
+            Console.WriteLine("Lista de todos los departamentos: \n");
+    
+            db.Departments.ToList().ForEach(de => Console.WriteLine(de.Name));
+
+        }
+        //await Task.Delay(4000);
+
+        Console.Clear();
     }
 
 }

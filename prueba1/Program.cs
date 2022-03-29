@@ -17,10 +17,7 @@ internal class Program
         bool b;
         int num;
 
-        using(var db = new DepartamentoRecursos())
-        {
-            Console.WriteLine($"Database path: {db.}.");
-        }
+       
 
         do {
             Console.WriteLine("Selecciona la opcion que deseas realizar: \n");
@@ -51,31 +48,70 @@ internal class Program
             }
 
 
-        }while(b == true && num != 0);
-        
+        } while (b == true && num != 0);
+
 
     }
 
 
     static void Crear()
     {
-        Console.WriteLine("Creando...\n");
+        using (var db = new prueba1.DepartamentoRecursos())
+        {
+            Console.WriteLine($"Database path: {db.Database.ProviderName}.\n");
+
+            String nombre;
+            String grupo;
+
+            do {
+                Console.WriteLine("Introduce el nombre del departamento: \n");
+                nombre = Console.ReadLine();
+
+                Console.WriteLine("Introduce el nombre del grupo al que pertenece ese departamento: \n");
+                grupo = Console.ReadLine();
+
+                if (nombre == null || grupo == null)
+                {
+                    Console.WriteLine("Uno de los dos campos no ha sido rellenado, vuelve a insertar los valores por favor.\n");
+                    
+                }
+
+            }while(nombre == null || grupo == null);
+            
+
+            Console.WriteLine("Creando nuevo departamento...\n");
+            db.Departments.Add(new prueba1.Department { Name = nombre, GroupName = grupo, ModifiedDate = DateTime.Now});
+            db.SaveChanges();
+
+            Console.WriteLine("Creado.\n");
+
+        }
+
     }
 
     static void Leer()
     {
-        Console.WriteLine("Leer\n");
+        using (var db = new prueba1.DepartamentoRecursos())
+        {
+            Console.WriteLine("Leer\n");
+        }
     }
 
     static void Actualizar()
     {
-        Console.WriteLine("Actualizar\n");
+        using (var db = new prueba1.DepartamentoRecursos())
+        {
+            Console.WriteLine("Actualizar\n");
+        }
     }
 
     static void Eliminar()
     {
-        Console.WriteLine("Eliminar\n");
+        using (var db = new prueba1.DepartamentoRecursos())
+        {
+            Console.WriteLine("Eliminar\n");
+        }
     }
 
-
+}
 

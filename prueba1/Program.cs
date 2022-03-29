@@ -18,15 +18,17 @@ internal class Program
         int num;
 
         do {
-            Console.WriteLine("____________________________________________\n");
-            Console.WriteLine("Selecciona la opcion que deseas realizar: \n");
-            Console.WriteLine("1. Crear\n");
-            Console.WriteLine("2. Leer\n");
-            Console.WriteLine("3. Actualizar\n");
-            Console.WriteLine("4. Eliminar\n");
-            Console.WriteLine("5. Mostrar\n");
-            Console.WriteLine("0. Salir\n");
-            Console.WriteLine("____________________________________________\n");
+            Console.WriteLine("____________________________________________");
+            Console.WriteLine("DEPARTAMENTO DE RECURSOS HUMANOS          ");
+            Console.WriteLine("____________________________________________");
+            Console.WriteLine("Selecciona la opcion que deseas realizar: ");
+            Console.WriteLine("1. Crear");
+            Console.WriteLine("2. Leer");
+            Console.WriteLine("3. Actualizar");
+            Console.WriteLine("4. Eliminar");
+            Console.WriteLine("5. Mostrar");
+            Console.WriteLine("0. Salir");
+            Console.WriteLine("____________________________________________");
 
             eleccion = Console.ReadLine();
 
